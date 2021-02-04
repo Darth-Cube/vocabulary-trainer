@@ -31,46 +31,21 @@ void selector(struct word *start) {
     for (int i = 0; input[i] != '\0'; i++) {
         input[i] = tolower(input[i]);
     }
-    int function = 0;
-
-    unsigned int len = strlen(input)-1;
-
-    if (strncmp(input, "hilfe", len) == 0) {
-        function = 1;
-    } else if (strncmp(input, "neu", len) == 0) {
-        function = 2;
-    } else if (strncmp(input, "loeschen", len) == 0) {
-        function = 3;
-    } else if (strncmp(input, "ausgeben", len) == 0) {
-        function = 4;
-    } else if (strncmp(input, "speichern", len) == 0) {
-        function = 5;
-    } else if (strncmp(input, "ueben", len) == 0) {
-        function = 6;
-    } else if (strncmp(input, "beenden", len) == 0) {
-        function = 7;
-    } else if (strncmp(input, "fehler", len) == 0) {
-        function = 8;
-    } else if (strncmp(input, "oeffnen", len) == 0) {
-        function = 9;
-    }else if (strncmp(input, "fehler loeschen", len) == 0) {
-        function = 10;
-    }
-    switch (function) {
+    switch (getFunction(input)) {
         case 1:
-            printf("\n");
-            printf("hilfe\t\t gibt die Hilfe-Uebersicht aus.\n");
-            printf("neu\t\t erstellt eine neue Vokabel.\n");
-            printf("loeschen\t entfernt eine Vokabel.\n");
-            printf("ausgeben\t gibt alle Vokabeln aus.\n");
-            printf("speichern\t speichert die Vokabeln ab.\n");
-            printf("ueben\t\t ruft den Vokabeltrainer auf.\n");
-            printf("fehler\t\t gibt die Fehler-Datei aus.\n");
-            printf("fehler loeschen  loescht den Inhalt der Fehler-Datei.\n");
-            printf("oeffnen\t\t oeffnet den Vokabel-Speicher erneut.\n "
-                   "\t\t Achtung: aktueller Stand wird nicht erneut abgespeichert!\n");
-            printf("beenden\t\t beendet das Programm.\n");
-            printf("\n\n");
+            printf("\n"
+                   "hilfe\t\t gibt die Hilfe-Uebersicht aus.\n"
+                   "neu\t\t erstellt eine neue Vokabel.\n"
+                   "loeschen\t entfernt eine Vokabel.\n"
+                   "ausgeben\t gibt alle Vokabeln aus.\n"
+                   "speichern\t speichert die Vokabeln ab.\n"
+                   "ueben\t\t ruft den Vokabeltrainer auf.\n"
+                   "fehler\t\t gibt die Fehler-Datei aus.\n"
+                   "fehler loeschen  loescht den Inhalt der Fehler-Datei.\n"
+                   "oeffnen\t\t oeffnet den Vokabel-Speicher erneut.\n "
+                   "\t\t Achtung: aktueller Stand wird nicht erneut abgespeichert!\n"
+                   "beenden\t\t beendet das Programm.\n"
+                   "\n\n");
             selector(start);
             break;
         case 2:
@@ -113,6 +88,34 @@ void selector(struct word *start) {
             selector(start);
             break;
     }
+}
+
+int getFunction(char *input){
+    int function = 0;
+    unsigned int len = strlen(input)-1;
+
+    if (strncmp(input, "hilfe", len) == 0) {
+        function = 1;
+    } else if (strncmp(input, "neu", len) == 0) {
+        function = 2;
+    } else if (strncmp(input, "loeschen", len) == 0) {
+        function = 3;
+    } else if (strncmp(input, "ausgeben", len) == 0) {
+        function = 4;
+    } else if (strncmp(input, "speichern", len) == 0) {
+        function = 5;
+    } else if (strncmp(input, "ueben", len) == 0) {
+        function = 6;
+    } else if (strncmp(input, "beenden", len) == 0) {
+        function = 7;
+    } else if (strncmp(input, "fehler", len) == 0) {
+        function = 8;
+    } else if (strncmp(input, "oeffnen", len) == 0) {
+        function = 9;
+    } else if (strncmp(input, "fehler loeschen", len) == 0) {
+        function = 10;
+    }
+    return function;
 }
 
 void delete(struct word *start) {

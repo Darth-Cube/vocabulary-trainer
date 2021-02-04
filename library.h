@@ -33,6 +33,8 @@ int initiate();
  */
 void selector(struct word *start);
 
+int getFunction(char *input);
+
 /**
  * @function newWord uebergibt der Funktion addWord eine Nutzereingabe und erstellt damit eine neue Vokabel
  * @param start ist ein Pointer auf das Erste Element der Liste
