@@ -1,0 +1,3 @@
+C:/Users/Samuel/Documents/GitHub/Praktikum_5_Vokabeltrainer/cmake-build-debug/CMakeFiles/Praktikum_5_Vokabeltrainer.dir
+C:/Users/Samuel/Documents/GitHub/Praktikum_5_Vokabeltrainer/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Samuel/Documents/GitHub/Praktikum_5_Vokabeltrainer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
