@@ -27,7 +27,7 @@ void selector(struct word *start) {
     char input[WORD_LENGTH];
     fgets(input, WORD_LENGTH, stdin);
 
-    //sorgt dafuer, dass Programm bei Eingabe nicht case-sensitiv ist
+    //loop adds case-sensitivity
     for (int i = 0; input[i] != '\0'; i++) {
         input[i] = tolower(input[i]);
     }
@@ -122,7 +122,7 @@ void delete(struct word *start) {
         fprintf(stderr,"Das Wort existiert nicht.\n");
         return;
     }
-    //Abfrage ob Wort wirklich geloescht werden soll
+    //asks if word really should get deleted
     printf("Geben Sie 1 ein, wenn Sie \"%s\" wirklich loeschen wollen, ansonsten 2:\n", word);
     int number[1];
     scanf("%d", number);
@@ -138,7 +138,7 @@ void delete(struct word *start) {
 void newWord(struct word *start) {
     printf("Bitte das Englische Wort eingeben:\n");
     char engWord[WORD_LENGTH], gerWord[WORD_LENGTH];
-    //Ueberpruefung ob Eingabe bereits in der Liste ist
+    //tests if word is in list
     if(getWord(engWord, start) == 2){
         printf("Das Wort ist bereits vorhanden.\n");
         return;
@@ -150,7 +150,7 @@ void newWord(struct word *start) {
     }
 
     struct word *temp = start;
-    //schleife bis zum Ende der Liste
+    //goes to last element of wordlist
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -163,7 +163,7 @@ void newWord(struct word *start) {
 
 int getWord(char *word, struct word *start) {
     fgets(word, WORD_LENGTH, stdin);
-    //formatierung der Nutzereingabe (\n aus der Konsole wird entfernt)
+    //formats user input (removes ascii '\n')
     for (int i = 0; word[i] != '\0'; i++) {
         if (word[i] == '\n') {
             word[i] = '\0';
@@ -206,7 +206,7 @@ void stop(struct word *start){
 }
 
 int initiate(struct word *start) {
-    //oeffnen von 'errors.dat'
+    //opens stream from 'errors.dat'
     FILE *errors = fopen("errors.dat", "a");
     if (errors == NULL) {
         fprintf(stderr, "Kritischer Fehler!\n Programm wird nun geschlossen.\n");
@@ -214,7 +214,7 @@ int initiate(struct word *start) {
         return 1;
     }
 
-    //oeffnen von 'words.dat'
+    //opens stream from 'words.dat'
     FILE *words = fopen("vocabulary.dat", "r");
 
     if (words == NULL) {
@@ -232,7 +232,6 @@ int initiate(struct word *start) {
         }
     }
 
-    //uebergibt die Stream-Pointer der Funktion readData mit start-Pointer
     if (readData(words, errors, start)) {
         fprintf(stderr, "Dateien konnten nicht gelesen werden.\n");
     }

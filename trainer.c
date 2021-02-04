@@ -7,7 +7,7 @@
 
 void exercise(struct word *start) {
     char input[WORD_LENGTH];
-    //Schleife, die durch nutzereingabe von 'naechstes' aufrechterhalten wird, funktion randomWord wird immer aufgerufen
+    //loop for learning vocabulary, breaks with input of "exit"
     printf("Willkommen beim Vokabeltrainer!\n"
            "Um aufzuhoeren einfach \"exit\" eingeben.\n\n");
     do {
@@ -34,7 +34,7 @@ struct word randomWord(struct word *start) {
     struct word *temp = start->next;
     int i = 0;
     int number = getRandomInt(start);
-    //Liste wird "number" Elemente durchlaufen, zufallselement wird ausgesucht und zurückgegeben
+    //picks random element from wordlist
     for (; temp->next != NULL && i <= number; i++) {
         temp = temp->next;
     }
@@ -45,7 +45,7 @@ void printEverything(struct word *start) {
     struct word *temp = start->next;
     printf("\nEnglish\t\t\tDeutsch\n\n");
 
-    //gibt gesamte Liste Zeile fuer Zeile aus
+    //prints content of wordlist
     while (temp != NULL) {
         printf("%-20s\t%s\n", temp->engWord, temp->gerWord);
         temp = temp->next;
@@ -55,7 +55,7 @@ void printEverything(struct word *start) {
 
 int getRandomInt(struct word *start) {
     srand((time(NULL) * time(NULL)));
-    //Zufallszahl mit time(NULL) zum quadrat als seed begrenzt durch modulo anzahl an woertern
+    //seed for rand()
     int random = rand() % getCountWords(start);
     return random;
 }
@@ -64,7 +64,7 @@ int getCountWords(struct word *start) {
     int i;
     struct word *temp = start->next;
 
-    //schleife zaehlt vom Anfang bis zum Ende der Liste
+    //loop counts elements in wordlist
     for (i = 0; temp != NULL; i++) {
         temp = temp->next;
     }

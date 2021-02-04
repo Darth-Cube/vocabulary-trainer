@@ -9,7 +9,7 @@ int readData(FILE *words, FILE *errors, struct word *start) {
     char line[LINE_MAX], *engWord, *gerWord;
     int error = 0;
 
-    //einlesen jeder Zeile aus dem Stream words
+    //loop reads data from stream "words"
     while (fgets(line, LINE_MAX, words)) {
         if (line[0] == '\0' || line[1] == '\0' || line[0] == ';') {
             error++;
@@ -21,7 +21,7 @@ int readData(FILE *words, FILE *errors, struct word *start) {
                 error++;
             }
         }
-        //wenn Fehlerhaft, wird der Fehler in errors geschrieben um Verlust von Vokabeln zu vermeiden
+        //errors are written to stream "errors"
         if (error == 0) {
             if (proofRead(engWord, start) || proofRead(gerWord, start)) {
                 error++;
@@ -46,7 +46,7 @@ int saveData(struct word *start) {
         fprintf(stderr, "Vokabel-Datei konnte nicht geöffnet werden.\n");
         return 1;
     } else {
-        //Vokabeln werden Zeile fuer Zeile in den stream "words" geschrieben
+        //words are written to stream "words
         struct word *ptr = start->next;
         while (ptr != NULL) {
             fprintf(words, "%s;%s\n", ptr->engWord, ptr->gerWord);
@@ -63,9 +63,9 @@ int proofRead(char *word, struct word *ptr) {
 
     for (int i = 0; i <= strlen(word) - 1; i++) {
 
-        //alphabets pruefung
+        //tests for disallowed ascii characters
         if (!(isalpha(word[i]) || word[i] == '\n')) {
-            //zaehlt die leerstellen
+            //loop counts spaces
             if (word[i] == ' ') {
                 counter++;
             } else {
@@ -94,7 +94,7 @@ void viewErrors() {
         return;
     }
     char line[LINE_MAX];
-    //jede Zeile von errors wird ausgelesen
+    //reads data from stream "errors" and puts into console
     while (fgets(line, LINE_MAX, errors)) {
         fputs(line, stderr);
         fflush(stderr);
@@ -116,7 +116,7 @@ void remErrors() {
 void close(struct word *start) {
     struct word *temp = start, *remove;
 
-    //heap speicher wird mit free() freigegeben
+    //free heap memory
     while (temp != NULL) {
         remove = temp;
         temp = temp->next;
