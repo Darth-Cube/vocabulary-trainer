@@ -4,7 +4,7 @@
 
 #include "library.h"
 
-struct word *addWord(char *pEngWord, char *pGerWord, struct word *ptr) {
+struct word *addWord (char *pEngWord, char *pGerWord, struct word *ptr) {
     struct word *newWord = malloc(sizeof(struct word));
     if (newWord == NULL) {
         fprintf(stderr, "Kritischer Fehler!\n");
@@ -17,7 +17,7 @@ struct word *addWord(char *pEngWord, char *pGerWord, struct word *ptr) {
     return newWord;
 }
 
-int delWord(char *word, struct word *ptr) {
+int delWord (char *word, struct word *ptr) {
     while (ptr != NULL) {
         /* die Liste wird nach dem word durchsucht
            falls dieses gefunden wurde, wird der Speicher freigegeben

@@ -21,7 +21,7 @@ int main() {
     return EXIT_SUCCESS;
 }
 
-void selector(struct word *start) {
+void selector (struct word *start) {
     printf("\nBitte Namen der Funktion eingeben, "
            "fuer mehr \"hilfe\" eingeben.\n");
     char input[WORD_LENGTH];
@@ -29,7 +29,7 @@ void selector(struct word *start) {
 
     //loop adds case-sensitivity
     for (int i = 0; input[i] != '\0'; i++) {
-        input[i] = tolower(input[i]);
+        input[i] = (char)tolower(input[i]);
     }
     switch (getFunction(input)) {
         case 1:
@@ -90,9 +90,9 @@ void selector(struct word *start) {
     }
 }
 
-int getFunction(char *input){
+int getFunction (char *input){
     int function = 0;
-    unsigned int len = strlen(input)-1;
+    unsigned int len = strlen(input) - 1;
 
     if (strncmp(input, "hilfe", len) == 0) {
         function = 1;
@@ -118,7 +118,7 @@ int getFunction(char *input){
     return function;
 }
 
-void delete(struct word *start) {
+void delete (struct word *start) {
     char word[WORD_LENGTH];
     printf("Bitte zu loeschendes Wort eingeben:\n");
     if (getWord(word, start) == 0){
@@ -127,9 +127,12 @@ void delete(struct word *start) {
     }
     //asks if word really should get deleted
     printf("Geben Sie 1 ein, wenn Sie \"%s\" wirklich loeschen wollen, ansonsten 2:\n", word);
-    int number[1];
-    scanf("%d", number);
-    if (number[0] == 1) {
+    char number[1];
+    fgets(number, 2, stdin);
+    //scanf("%d", number);
+    char *ptr;
+    int num = strtol(number,&ptr,10);
+    if (num == 1) {
         if (delWord(word, start) == 0) {
             printf("Vokabel wurde geloescht!\n\n\n");
         }
@@ -138,7 +141,7 @@ void delete(struct word *start) {
     }
 }
 
-void newWord(struct word *start) {
+void newWord (struct word *start) {
     printf("Bitte das Englische Wort eingeben:\n");
     char engWord[WORD_LENGTH], gerWord[WORD_LENGTH];
     //tests if word is in list
@@ -164,7 +167,7 @@ void newWord(struct word *start) {
     printf("Vokabel wurde hinzugefuegt.\n");
 }
 
-int getWord(char *word, struct word *start) {
+int getWord (char *word, struct word *start) {
     fgets(word, WORD_LENGTH, stdin);
     //formats user input (removes ascii '\n')
     for (int i = 0; word[i] != '\0'; i++) {
@@ -184,7 +187,7 @@ int getWord(char *word, struct word *start) {
     return EXIT_SUCCESS;
 }
 
-void reopen(struct word *start){
+void reopen (struct word *start){
     if (start == NULL) {
         fprintf(stderr, "Speicher konnte nicht initialisiert werden!\n"
                         "Das Programm wird nun beendet.\n");
@@ -198,7 +201,7 @@ void reopen(struct word *start){
     printf("Die Vokabel-Datei wurde erneut geoeffnet.\n");
 }
 
-void stop(struct word *start){
+void stop (struct word *start){
     if (saveData(start)) {
         fprintf(stderr, "Durch einen Fehler, konnten die Vokabeln nicht gespeichert werden.\n "
                         "Das Programm wird daher noch nicht beendet.\n");
@@ -208,7 +211,7 @@ void stop(struct word *start){
     printf("Das Programm wurde beendet.\n");
 }
 
-int initiate(struct word *start) {
+int initiate (struct word *start) {
     //opens stream from 'errors.dat'
     FILE *errors = fopen("errors.dat", "a");
     if (errors == NULL) {

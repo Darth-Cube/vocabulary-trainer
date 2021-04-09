@@ -5,7 +5,7 @@
 #include "library.h"
 #include <time.h>
 
-void exercise(struct word *start) {
+void exercise (struct word *start) {
     char input[WORD_LENGTH];
     //loop for learning vocabulary, breaks with input of "exit"
     printf("Willkommen beim Vokabeltrainer!\n"
@@ -30,18 +30,17 @@ void exercise(struct word *start) {
     } while (&free);
 }
 
-struct word randomWord(struct word *start) {
+struct word randomWord (struct word *start) {
     struct word *temp = start->next;
-    int i = 0;
     int number = getRandomInt(start);
     //picks random element from wordlist
-    for (; temp->next != NULL && i <= number; i++) {
+    for (int i = 0; temp->next != NULL && i <= number; i++) {
         temp = temp->next;
     }
     return *temp;
 }
 
-void printEverything(struct word *start) {
+void printEverything (struct word *start) {
     struct word *temp = start->next;
     printf("\nEnglish\t\t\tDeutsch\n\n");
 
@@ -53,14 +52,13 @@ void printEverything(struct word *start) {
     printf("\n\n");
 }
 
-int getRandomInt(struct word *start) {
-    srand((time(NULL) * time(NULL)));
+int getRandomInt (struct word *start) {
     //seed for rand()
-    int random = rand() % getCountWords(start);
-    return random;
+    srand((time(NULL) * time(NULL)));
+    return rand() % getCountWords(start);
 }
 
-int getCountWords(struct word *start) {
+int getCountWords (struct word *start) {
     int i;
     struct word *temp = start->next;
 

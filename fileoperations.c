@@ -4,7 +4,7 @@
 
 #include "library.h"
 
-int readData(FILE *words, FILE *errors, struct word *start) {
+int readData (FILE *words, FILE *errors, struct word *start) {
     struct word *ptr = start;
     char line[LINE_MAX], *engWord, *gerWord;
     int error = 0;
@@ -40,7 +40,7 @@ int readData(FILE *words, FILE *errors, struct word *start) {
     return 0;
 }
 
-int saveData(struct word *start) {
+int saveData (struct word *start) {
     FILE *words = fopen("vocabulary.dat", "w");
     if (words == NULL) {
         fprintf(stderr, "Vokabel-Datei konnte nicht geöffnet werden.\n");
@@ -58,7 +58,7 @@ int saveData(struct word *start) {
     return 0;
 }
 
-int proofRead(char *word, struct word *ptr) {
+int proofRead (char *word, struct word *ptr) {
     int counter = 0;
 
     for (int i = 0; i <= strlen(word) - 1; i++) {
@@ -87,7 +87,7 @@ int proofRead(char *word, struct word *ptr) {
     }
 }
 
-void viewErrors() {
+void viewErrors () {
     FILE *errors = fopen("errors.dat", "r");
     if (errors == NULL) {
         fprintf(stderr, "Fehler-Datei konnte nicht geöffnet werden!\n");
@@ -104,7 +104,7 @@ void viewErrors() {
     fclose(errors);
 }
 
-void remErrors() {
+void remErrors () {
     FILE *errors = fopen("errors.dat", "w");
     if (errors == NULL) {
         fprintf(stderr, "Fehler-Datei konnte nicht geloescht werden!\n");
@@ -113,9 +113,8 @@ void remErrors() {
     fclose(errors);
 }
 
-void close(struct word *start) {
+void close (struct word *start) {
     struct word *temp = start, *remove;
-
     //free heap memory
     while (temp != NULL) {
         remove = temp;
